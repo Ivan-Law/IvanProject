@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>IvanLaw - Python Evanglist</title>
+    <style>
+        div[class|="col"]
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-primary">
+    <h4 class="display-4">Python Evanglist</h4><br><p>Ivan Law</p>
+</nav>
+<div class="container-fluid">
+ <div class="row">
+    {% load static %}
+    <div class="col-md-12">
+
+    <img src="{% static 'images/Grow_Blue.svg' %}" width="50"><br>
+    <img src="{% static 'images/Plan_Blue.svg' %}" width="30"> Today is {{SayToday}}<br>
+
+    <form method="post">
+        {% csrf_token %}
+        <img src="{% static 'images/Suitcase_Blue.svg' %}" width="30"> Try your desire ticker
+        <input type="text" name="mybox" placeholder="E.g. GOOG or 0005.HK">
+        <input type="submit" value="Submit" />
+    </form>
+    <br>
+
+    <table class="table table-striped">
+    <tr>
+        <th>Stock Quote</th>
+        <th>Last T/D</th>
+        <th>Last Price</th>
+        <th>Daily PnL</th>
+        <th>MTD PnL</th>
+        <th>YTD PnL</th>
+    </tr>
+
+{% if myForm %}
+    {% for s in myForm %}
+    <tr>
+        <th>{{ s.stockticker }}</th>
+        <th>{{ s.lasttradeday }}</th>
+        <th>{{ s.lastprice }}</th>
+        <th>{{ s.dailypnl }}</th>
+        <th>{{ s.mtdpnl }}</th>
+        <th>{{ s.ytdpnl }}</th>
+    </tr>
+    {% endfor %}
+{% endif %}
+
+    </table>
+
+    <p><img src="{% static 'images/Cert_Blue.svg' %}" width="30"> Source data: https://finance.yahoo.com/</p>
+    <p><img src="{% static 'images/Battery_Blue.svg' %}" width="30"> Batteries: Django, Pandas_datareader & Bootstrap</p>
+
+    </div>
+ </div>
+</div>
+</body>
+</html>
